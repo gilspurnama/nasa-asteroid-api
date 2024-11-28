@@ -4,6 +4,8 @@ import com.nasa.nasaasteroidapi.dto.FeedDto;
 import com.nasa.nasaasteroidapi.service.FeedService;
 import com.nasa.nasaasteroidapi.util.ParameterStringBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,16 +25,23 @@ import static com.nasa.nasaasteroidapi.util.ParameterStringBuilder.getParamsStri
 @Service
 public class FeedServiceImpl implements FeedService {
 
+    private final RestTemplate restTemplate;
+
+    public FeedServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
+
     @Override
     public FeedDto.GetFeedData getNeoFeedData(FeedDto.RequestParameters requestParameters) throws UnsupportedEncodingException {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         Map<String, String> parameters = new HashMap<>();
         parameters.put("start_date", requestParameters.getStartDate());
         parameters.put("end_date", requestParameters.getEndDate());
         parameters.put("api_key", NASA_API_KEY.value());
 
         String completeURI = NASA_NEO_REST_FEED_V1.value() + "?" + getParamsString(parameters);
-        return restTemplate.getForObject(completeURI, FeedDto.GetFeedData.class);
+        FeedDto.GetFeedData response = restTemplate.getForObject(completeURI, FeedDto.GetFeedData.class);
+        return response;
     }
 
     @Override

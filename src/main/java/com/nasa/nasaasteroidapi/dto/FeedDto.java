@@ -12,7 +12,6 @@ import java.util.Map;
 public class FeedDto {
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class GetFeedData {
         private Links links;
@@ -23,7 +22,6 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class Links {
         private String next;
@@ -32,10 +30,15 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    @Builder
+    public static class NeoLink {
+        private String self;
+    }
+
+    @Getter
     @Builder
     public static class NearEarthObjectData {
-        private String links;
+        private NeoLink links;
         private String id;
         @JsonProperty("neo_reference_id")
         private String neoReferenceId;
@@ -46,14 +49,13 @@ public class FeedDto {
         private Long absoluteMagnitudeH;
         private EstimatedDiameter estimatedDiameter;
         @JsonProperty("is_potentially_hazardous_asteroid")
-        private String isPotentiallyHazardousAsteroid;
+        private Boolean isPotentiallyHazardousAsteroid;
         private CloseApproachData closeApproachData;
         @JsonProperty("is_sentry_object")
-        private String isSentryObject;
+        private Boolean isSentryObject;
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class CloseApproachData {
         @JsonProperty("close_approach_date")
@@ -69,7 +71,6 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class RelativeVelocity {
         @JsonProperty("kilometers_per_second")
@@ -81,7 +82,6 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class MissDistance {
         private String astronomical;
@@ -91,7 +91,6 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class EstimatedDiameter {
         private EstimatedDiameterMinMax kilometers;
@@ -100,7 +99,6 @@ public class FeedDto {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class EstimatedDiameterMinMax {
         @JsonProperty("estimated_diameter_min")
@@ -111,8 +109,6 @@ public class FeedDto {
 
     @Getter
     @Setter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    @Builder
     public static class RequestParameters {
         private String startDate;
         private String endDate;
