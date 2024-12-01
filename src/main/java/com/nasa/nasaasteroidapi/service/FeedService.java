@@ -8,6 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 
 public interface FeedService {
-    FeedDto.GetFeedData getNeoFeedData(FeedDto.RequestParameters requestParameters) throws IOException;
-    FeedDto.NearEarthObjectData getNeoLookupData(String neoId) throws UnsupportedEncodingException;
+    FeedDto.FeedDataResponse getNeoFeedData(FeedDto.RequestParameters requestParameters) throws IOException;
+    FeedDto.FeedLookupResponse getNeoLookupData(String neoId) throws UnsupportedEncodingException;
 }

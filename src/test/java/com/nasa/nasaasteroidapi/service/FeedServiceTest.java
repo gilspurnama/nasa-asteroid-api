@@ -25,8 +25,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.nasa.nasaasteroidapi.util.EnumHelper.NASA_API_KEY;
 import static com.nasa.nasaasteroidapi.util.EnumHelper.NASA_NEO_REST_FEED_V1;
@@ -65,7 +64,7 @@ public class FeedServiceTest {
         Mockito.when(restTemplate.getForObject(completeURI,FeedDto.GetFeedData.class)).thenReturn(setFeedData());
 
         ReflectionTestUtils.setField(feedServiceImpl, "restTemplate", restTemplate);
-        FeedDto.GetFeedData result = feedServiceImpl.getNeoFeedData(requestParameters);
+        FeedDto.FeedDataResponse result = feedServiceImpl.getNeoFeedData(requestParameters);
 
         assertEquals(result.getElementCount(), 1);
     }
@@ -109,12 +108,14 @@ public class FeedServiceTest {
                 .missDistance(missDistance)
                 .orbitingBody("Earth")
                 .build();
+        LinkedList<FeedDto.CloseApproachData> listOfCloseApproachData = new LinkedList<>();
+        listOfCloseApproachData.add(closeApproachData);
 
-        FeedDto.NeoLink neoLink = FeedDto.NeoLink.builder()
-                .self("selfLink").build();
+//        FeedDto.Self neoLink = FeedDto.Self.builder()
+//                .self("selfLink").build();
 
         FeedDto.NearEarthObjectData neoData = FeedDto.NearEarthObjectData.builder()
-                .links(neoLink)
+//                .links(neoLink)
                 .id("neoID")
                 .neoReferenceId("neoReferenceId")
                 .name("neoName")
@@ -122,12 +123,13 @@ public class FeedServiceTest {
                 .absoluteMagnitudeH(20L)
                 .estimatedDiameter(estimatedDiameter)
                 .isPotentiallyHazardousAsteroid(true)
-                .closeApproachData(closeApproachData)
+                .closeApproachData(listOfCloseApproachData)
                 .isSentryObject(false)
                 .build();
 
-        FeedDto.NearEarthObjectData[] neoDataArr = new FeedDto.NearEarthObjectData[]{neoData};
-        Map<String, FeedDto.NearEarthObjectData[]> nearEarthData = new HashMap<>();
+        LinkedList<FeedDto.NearEarthObjectData> neoDataArr = new LinkedList<>();
+        neoDataArr.add(neoData);
+        LinkedHashMap<String, LinkedList<FeedDto.NearEarthObjectData>> nearEarthData = new LinkedHashMap<>();
         nearEarthData.put("2015-09-08", neoDataArr);
 
         return FeedDto.GetFeedData.builder()
