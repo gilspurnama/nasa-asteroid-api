@@ -2,18 +2,12 @@ package com.nasa.nasaasteroidapi.service.impl;
 
 import com.nasa.nasaasteroidapi.dto.FeedDto;
 import com.nasa.nasaasteroidapi.service.FeedService;
-import com.nasa.nasaasteroidapi.util.ParameterStringBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 

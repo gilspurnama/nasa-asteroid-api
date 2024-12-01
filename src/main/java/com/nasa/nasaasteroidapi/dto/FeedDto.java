@@ -2,12 +2,9 @@ package com.nasa.nasaasteroidapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 
 public class FeedDto {

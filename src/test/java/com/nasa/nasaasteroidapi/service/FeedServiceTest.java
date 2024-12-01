@@ -6,25 +6,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
-import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import static com.nasa.nasaasteroidapi.util.EnumHelper.NASA_API_KEY;
@@ -110,9 +101,6 @@ public class FeedServiceTest {
                 .build();
         LinkedList<FeedDto.CloseApproachData> listOfCloseApproachData = new LinkedList<>();
         listOfCloseApproachData.add(closeApproachData);
-
-//        FeedDto.Self neoLink = FeedDto.Self.builder()
-//                .self("selfLink").build();
 
         FeedDto.NearEarthObjectData neoData = FeedDto.NearEarthObjectData.builder()
 //                .links(neoLink)
